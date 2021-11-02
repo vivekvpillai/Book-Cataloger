@@ -1,20 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios'
+import {useState, useEffect} from 'react';
 
 
-author: String,
-title: {type:String, require: true},
-genre: String
-
-/books
+// author: String,
+// title: {type:String, require: true},
+// genre: String
+//
+// /books
 
 function App() {
 
   const [newAuthor, setAuthor] = useState('');
   const [newTitle, setTitle] = useState('');
   const [newGenre, setGenre] = useState('');
-  const [books, setBooks] = useState('');
+  const [books, setBooks] = useState([]);
 
   const handleNewAuthor = (event) => {
     setAuthor(event.target.value)
@@ -47,7 +48,7 @@ function App() {
             })
   }
 
-  const handleBookUpdate = (event) => {
+  const handleBookUpdate = (books) => {
     axios
       .put(
           `http://localhost:3000/books/${books._id}`,
@@ -83,6 +84,7 @@ function App() {
           .get('http://localhost:3000/books')
           .then((response)=>{
               setBooks(response.data)
+              console.log(books)
           })
   },[])
 
@@ -99,7 +101,7 @@ function App() {
             Author: <input type="text" onChange={handleNewGenre}/><br/>
             Title: <input type="text" onChange={handleTitleChange} /><br/>
             Genre: <input type="text" onChange={handleNewGenre} /><br/>
-            <input type="submit" value="create animal"/>
+            <input type="submit" value="create book"/>
           </form>
         </section>
         <section>
@@ -116,7 +118,7 @@ function App() {
                         <br/>
                         <section>
                           <h2>Edit Book</h2>
-                          <form onSubmit={handleBookUpdate}>
+                          <form onSubmit={(event) => {handleBookUpdate(book)}}>
                             Author: <input type="text" onChange={handleNewAuthor}/>
                             <br/>
                             Title: <input type="text" onSubmit={handleTitleChange} />
