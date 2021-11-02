@@ -98,7 +98,7 @@ function App() {
         <section>
           <h2>Create a new Book</h2>
           <form onSubmit={handleNewBookFormSubmit}>
-            Author: <input type="text" onChange={handleNewGenre}/><br/>
+            Author: <input type="text" onChange={handleNewAuthor}/><br/>
             Title: <input type="text" onChange={handleTitleChange} /><br/>
             Genre: <input type="text" onChange={handleNewGenre} /><br/>
             <input type="submit" value="create book"/>
@@ -121,9 +121,9 @@ function App() {
                           <form onSubmit={(event) => {handleBookUpdate(book)}}>
                             Author: <input type="text" onChange={handleNewAuthor}/>
                             <br/>
-                            Title: <input type="text" onSubmit={handleTitleChange} />
+                            Title: <input type="text" onChange={handleTitleChange} />
                             <br/>
-                            Genre: <input type="text" onSubmit={handleNewGenre} />
+                            Genre: <input type="text" onChange={handleNewGenre} />
                             <br/>
                             <input type="submit" value="Submit Edits" />
                           </form>
